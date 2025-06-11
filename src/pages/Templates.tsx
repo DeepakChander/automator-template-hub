@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { supabase, Workflow } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -9,9 +9,18 @@ import { Badge } from '@/components/ui/badge'
 import { Search, ArrowRight, Loader2 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
+// Interface for Templates page - only includes fields we need for display
+interface TemplatePreview {
+  id: string
+  workflow_name: string
+  category: string
+  use_case: string
+  created_at: string
+}
+
 const Templates = () => {
-  const [workflows, setWorkflows] = useState<Workflow[]>([])
-  const [filteredWorkflows, setFilteredWorkflows] = useState<Workflow[]>([])
+  const [workflows, setWorkflows] = useState<TemplatePreview[]>([])
+  const [filteredWorkflows, setFilteredWorkflows] = useState<TemplatePreview[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
